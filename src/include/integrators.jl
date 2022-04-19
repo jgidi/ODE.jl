@@ -10,9 +10,9 @@ Standard Fourth order Runge-Kutta integrator.
 """
 function rungekutta4(dydt, y, t, dt)
     k1 = dt .* dydt(y, t)
-    k2 = dt .* dydt(@. y + k1/2, t + dt/2)
-    k3 = dt .* dydt(@. y + k2/2, t + dt/2)
-    k4 = dt .* dydt(@. y + k3  , t + dt)
+    k2 = dt .* dydt(y .+ k1./2, t + dt/2)
+    k3 = dt .* dydt(y .+ k2./2, t + dt/2)
+    k4 = dt .* dydt(y .+ k3   , t + dt)
 
     return @. y + (k1 + 2k2 + 2k3 + k4) / 6 # y(t + dt)
 end
