@@ -20,7 +20,7 @@ function integrate_ode(dydt, y0, Nt, dt; integrator=euler)
     trajectory = Array{Float64}(undef, length(y0), Nt)
 
     y = copy(y0)
-    progressbar = Progress(Nt)
+    progressbar = Progress(Nt, desc="Integrating...")
     for (i, t) in enumerate(time)
 
         # Obtain y(t+dt) from y(t) and dydt(y, t)
