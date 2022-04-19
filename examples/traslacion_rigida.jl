@@ -15,7 +15,7 @@ dt = 1e-3
 
 # Differential equation
 v(x) = 1.0
-dudt(u, t) = - v(x) * derivative(u, x)
+dudt(u, t) = - v(x) .* derivative(u, x)
 
 # Integrate initial conditions with ODE.integrate_ode
 time, ut = integrate_ode(dudt, u, Nt, dt)
