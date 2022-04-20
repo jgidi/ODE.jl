@@ -7,7 +7,7 @@ xmin, xmax = 0.0, 2pi
 x = range(xmin, step=(xmax-xmin)/Nx, length=Nx)
 
 # Temporal discretization
-Nt = 1000
+Nt = 1400
 dt = (x[2]-x[1])/4
 
 # Initial conditions
@@ -31,9 +31,13 @@ anim = @animate for i in instants_to_plot
     plot!(p, x, ut[:, 1], l = (:gray, :dash), label="\$u(x, 0)\$")
     # Plot ut at current time
     plot!(p, x, ut[:, i], l = (:black), label="\$u(x, t)\$")
-    # Add title with current time
-    plot!(p, title = "t = $(round(time[i], digits=3))")
+    # Add other labels
+    plot!(p,
+          xlabel = "\$ x\$",
+          ylabel = "\$ u\$",
+          title = "t = $(round(time[i], digits=2))",
+          )
 end
 
 # Save animation as mp4
-mp4(anim, "trefethen.mp4")
+mp4(anim, "trefethen-3.13.mp4")

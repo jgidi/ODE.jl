@@ -6,12 +6,12 @@ Nx = 256
 xmin, xmax = 0.0, 2pi
 x = range(xmin, step=(xmax-xmin)/Nx, length=Nx)
 
+# Temporal discretization
+Nt = 2000
+dt = 1e-3
+
 # Initial conditions
 u = sin.(x)
-
-# Temporal discretization
-Nt = 1000
-dt = 1e-3
 
 # Differential equation
 v(x) = 1.0
@@ -31,8 +31,12 @@ anim = @animate for i in instants_to_plot
     plot!(p, x, ut[:, 1], l = (:gray, :dash), label="\$u(x, 0)\$")
     # Plot ut at current time
     plot!(p, x, ut[:, i], l = (:black), label="\$u(x, t)\$")
-    # Add title with current time
-    plot!(p, title = "t = $(round(time[i], digits=3))")
+    # Add other labels
+    plot!(p,
+          xlabel = "\$ x\$",
+          ylabel = "\$ u\$",
+          title = "t = $(round(time[i], digits=2))",
+          )
 end
 
 # Save animation as mp4
