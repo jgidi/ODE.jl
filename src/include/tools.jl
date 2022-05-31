@@ -22,8 +22,16 @@ function derivative(fx, x; order=1, plan)
     Nx = length(x) # Number of space nodes
     dx = x[2]-x[1] # Space step
 
-    # Frequency axis multiplied by i=√(-1)
-    ik = im .* rfftfreq(Nx, 2pi/dx)
+    # Frequency axis
+    k = rfftfreq(Nx, 2pi/dx)
 
-    return plan \ ( (plan * fx) .* ik.^order )
+    # Derivative in Fourier space
+    df_fourier =  (plan * fx) .* (im.*k).^order
+
+    # Apply filter
+    maxk = maximum(k)
+    filter = @. exp(-36(k/maxk)^36)
+    df_fourier .*= filter
+
+    return plan \ df_fourier
 end
