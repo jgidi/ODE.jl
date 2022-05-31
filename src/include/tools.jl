@@ -18,7 +18,7 @@ function derivative(fx, x; order=1)
     return irfft(rfft(fx) .* ik.^order, Nx)
 end
 
-function derivative(fx, x; order=1, plan)
+function derivative_plan(fx, x, plan; order=1)
     Nx = length(x) # Number of space nodes
     dx = x[2]-x[1] # Space step
 
